@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=arrow_outward"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+    <script defer src="js/script.js"></script>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <title>Muhumuza Deus</title>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li>
+            <a class="header-nav-link logo" href="#">MD</a>
+          </li>
+          <li>
+            <a class="dynamic-home-btn header-nav-link" href="#">
+              <ion-icon class="nav-icon" name="home-outline"></ion-icon>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li>
+            <a class="header-nav-link" href="#about-me-section">
+              <ion-icon class="nav-icon" name="person-outline"></ion-icon>
+              <span class="nav-text">About</span>
+            </a>
+          </li>
+          <li>
+            <a class="header-nav-link" href="#tools-tech-section">
+              <ion-icon class="nav-icon" name="construct-outline"></ion-icon>
+              <span class="nav-text">Tools</span>
+            </a>
+          </li>
+          <li>
+            <a class="header-nav-link" href="#activity-section">
+              <ion-icon class="nav-icon" name="pulse-outline"></ion-icon>
+              <span class="nav-text">Activity</span>
+            </a>
+          </li>
+          <li>
+            <a class="header-nav-link" href="#projects-section">
+              <ion-icon class="nav-icon" name="folder-open-outline"></ion-icon>
+              <span class="nav-text">Projects</span>
+            </a>
+          </li>
+          <li>
+            <a class="header-nav-link" href="#blog-section">
+              <ion-icon
+                class="nav-icon"
+                name="document-text-outline"
+              ></ion-icon>
+              <span class="nav-text">Blog</span>
+            </a>
+          </li>
+          <li>
+            <button class="btn lightmode-btn">
+              <ion-icon
+                class="icon-header-nav"
+                name="contrast-outline"
+              ></ion-icon>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- DOTS DESIGN TOP -->
+    <div class="container">
+      <div class="dot-grid-banner-lg"></div>
+    </div>
+
+    <main>
+      <!-- HERO -->
+      <section class="container hero-section">
+        <div class="hero-container">
+          <div class="hero-img-container">
+            <img
+              class="hero-img"
+              alt="A portrait image of deus"
+              src="assets/me.jpg"
+            />
+          </div>
+        </div>
+        <div class="name-roles-status">
+          <button class="btn icon-sm change-img-btn">
+            <ion-icon class="refresh" name="shuffle"></ion-icon>
+          </button>
+          <p class="my-name text-lg">Muhumuza Deus</p>
+          <p class="roles text-sm">Aspiring Machine Learning Scientist</p>
+          <div class="status">
+            <p class="btn-icon-pair">
+              <ion-icon
+                class="status-indicator"
+                name="radio-button-on"
+              ></ion-icon
+              ><span class="text-sm">Online</span>
+            </p>
+            <p class="website-visits btn-icon-pair">
+              <ion-icon name="eye"></ion-icon>
+              <span class="text-sm">1.8k</span>
+            </p>
+            <p class="location btn-icon-pair">
+              <ion-icon name="location-outline"></ion-icon>
+              <span class="text-sm">Kampala, Uganda</span>
+            </p>
+            <p class="local-time btn-icon-pair">
+              <ion-icon name="time-outline"></ion-icon>
+              <span class="text-sm">12:00hrs</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container" id="about-me-section">
+        <div class="dot-grid-banner-sm"></div>
+      </div>
+
+      <!-- ABOUT ME -->
+      <section class="container">
+        <div class="about-contents">
+          <p class="about-me text-sm margin-bottom-sm">
+            A passionate statistics student at Kyambogo University and a
+            self-taught machine learning practitioner. My journey in the world
+            of data science, machine learning and deep learning has been driven
+            by curiosity. I'm always on the move to learn new things. <br />
+            I taught myself everything I know about machine learning and deep
+            learning, and my knowledge has been strengthened through utilising
+            books, online tutorials, Kaggle competitions and personal projects.
+            My desire to take the path least travelled has been my driving
+            force.
+          </p>
+          <div class="about-buttons">
+            <div class="call-email-container">
+              <button class="btn-large btn-icon-pair">
+                <ion-icon class="icon-sm" name="call"></ion-icon>
+                <span>Book a call</span>
+              </button>
+              <a href="mailto:muhumuzadeus7@gmail.com">
+                <button class="btn-large btn-icon-pair">
+                  <ion-icon class="icon-sm" name="mail"></ion-icon>
+                  <span>Email</span>
+                </button>
+              </a>
+            </div>
+            <button class="btn-large-inverted btn-icon-pair">
+              <ion-icon class="icon-sm" name="document"></ion-icon
+              ><span>Resume</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container" id="tools-tech-section">
+        <div class="dot-grid-banner-md"></div>
+      </div>
+
+      <!-- SKILLS -->
+      <section class="container">
+        <h2 class="heading-primary">Tools & Technologies</h2>
+        <div class="contents">
+          <div class="technologies-container">
+            <div class="tech-stack-container">
+              <p class="group-name text-sm">Data Science & Machine Learning</p>
+              <div class="tech-stack">
+                <a class="tech" href="https://scikit-learn.org/stable/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/scikitlearn/scikitlearn-original.svg"
+                  />
+                  <span class="text-sm">scikit-learn</span>
+                </a>
+                <a class="tech" href="https://pytorch.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg"
+                  />
+                  <span class="text-sm">Pytorch</span>
+                </a>
+                <a class="tech" href="https://numpy.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/numpy/numpy-original.svg"
+                  />
+                  <span class="text-sm">Numpy</span>
+                </a>
+                <a
+                  class="tech"
+                  href="https://docs.jax.dev/en/latest/index.html"
+                >
+                  <img class="icon-img-sm" src="./assets/jax.svg" />
+                  <span class="text-sm">JAX</span>
+                </a>
+              </div>
+            </div>
+            <div class="tech-stack-container">
+              <p class="group-name text-sm">The Web</p>
+              <div class="tech-stack">
+                <a
+                  class="tech"
+                  href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+                >
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+                  />
+                  <span class="text-sm">HTML</span>
+                </a>
+                <a
+                  class="tech"
+                  href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+                >
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg"
+                  />
+                  <span class="text-sm">CSS</span>
+                </a>
+                <!-- <a
+                  class="tech"
+                  href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                >
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                  />
+                  <span class="text-sm">JavaScript</span>
+                </a> -->
+              </div>
+            </div>
+            <div class="tech-stack-container">
+              <p class="group-name text-sm">Backend</p>
+              <div class="tech-stack">
+                <a class="tech" href="https://fastapi.tiangolo.com/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"
+                  />
+                  <span class="text-sm">FastAPI</span>
+                </a>
+                <a class="tech" href="https://www.python.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                  />
+                  <span class="text-sm">Python</span>
+                </a>
+              </div>
+            </div>
+            <div class="tech-stack-container">
+              <p class="group-name text-sm">Database</p>
+              <div class="tech-stack">
+                <a class="tech" href="https://www.postgresql.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                  />
+                  <span class="text-sm">PostgreSQL</span>
+                </a>
+                <a class="tech" href="https://sqlite.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg"
+                  />
+                  <span class="text-sm">SQLite</span>
+                </a>
+                <a class="tech" href="https://www.sqlalchemy.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlalchemy/sqlalchemy-original.svg"
+                  />
+                  <span class="text-sm">SQLAlchemy</span>
+                </a>
+              </div>
+            </div>
+            <div class="tech-stack-container">
+              <p class="group-name text-sm">Data Visualization & Analysis</p>
+              <div class="tech-stack">
+                <a class="tech" href="https://pandas.pydata.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg"
+                  />
+                  <span class="text-sm">Pandas</span>
+                </a>
+                <a class="tech" href="https://matplotlib.org/">
+                  <img
+                    class="icon-img-sm"
+                    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg"
+                  />
+                  <span class="text-sm">Matplotlib</span>
+                </a>
+                <a class="tech" href="https://seaborn.pydata.org/">
+                  <img class="icon-img-sm" src="./assets/seaborn.svg" />
+                  <span class="text-sm">Seaborn</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="tools-container">
+            <p class="group-name text-sm">Tools</p>
+            <div class="tools">
+              <a class="tool" href="https://git-scm.com/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+                />
+                <span class="text-sm">Git</span>
+              </a>
+              <a class="tool" href="https://github.com/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg"
+                />
+                <span class="text-sm">GitHub</span>
+              </a>
+              <a class="tool" href="https://www.jetbrains.com/pycharm/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pycharm/pycharm-original.svg"
+                />
+                <span class="text-sm">PyCharm IDE</span>
+              </a>
+              <a class="tool" href="https://code.visualstudio.com/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg"
+                />
+                <span class="text-sm">VS Code</span>
+              </a>
+              <a class="tool" href="https://colab.google/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecolab/googlecolab-original.svg"
+                />
+                <span class="text-sm">Google Colab</span>
+              </a>
+              <a class="tool" href="https://jupyter.org/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg"
+                />
+                <span class="text-sm">Jupyter</span>
+              </a>
+              <a class="tool" href="https://www.docker.com/">
+                <img
+                  class="icon-img-sm"
+                  src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"
+                />
+                <span class="text-sm">Docker</span>
+              </a>
+              <a class="tool" href="https://www.latex-project.org/">
+                <i class="devicon-latex-original icon-md"></i>
+                <span class="text-sm">Latex</span>
+              </a>
+              <a class="tool" href="https://www.latex-project.org/">
+                <span class="material-symbols-outlined icon-sm">
+                  antigravity
+                </span>
+                <span class="text-sm">Antigravity</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container" id="activity-section">
+        <div class="dot-grid-banner-md"></div>
+      </div>
+
+      <!-- ACTIVITIES -->
+      <section class="container">
+        <h2 class="heading-primary">Activity</h2>
+        <p class="heading-secondary">Github contributions</p>
+
+        <div class="github-activity-card margin-bottom-sm">
+          <div id="graph-container">
+            <div class="loading">Loading contribution data...</div>
+          </div>
+          <div class="graph-footer">
+            <div id="count-label"></div>
+            <div class="legend">
+              <span>Less</span>
+              <div class="l-sq" style="background: #161b22"></div>
+              <div class="l-sq" style="background: #393939"></div>
+              <div class="l-sq" style="background: #6e6e6e"></div>
+              <div class="l-sq" style="background: #919191"></div>
+              <div class="l-sq" style="background: #ffffff"></div>
+              <span>More</span>
+            </div>
+          </div>
+        </div>
+        <p class="heading-secondary">Spotify Playlists</p>
+        <div class="playlist-grid">
+          <iframe
+            data-testid="embed-iframe"
+            style="border-radius: 12px"
+            src="https://open.spotify.com/embed/playlist/2xGhFt6DKLE9kH3KE3ueUx?utm_source=generator&theme=0"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allowfullscreen=""
+            allow="
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              fullscreen;
+              picture-in-picture;
+            "
+            loading="lazy"
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container" id="projects-section">
+        <div class="dot-grid-banner-md"></div>
+      </div>
+
+      <!-- PROJECTS -->
+      <section class="container">
+        <h2 class="heading-primary">Projects</h2>
+        <div class="projects-container margin-bottom-sm">
+          <!-- Project 1 -->
+          <a
+            class="project"
+            href="https://github.com/MDeus-ai/PlantVision"
+            style="text-decoration: none"
+          >
+            <div class="project-img-container">
+              <img
+                class="project-img"
+                src="/assets/project img placeholder.jpg"
+              />
+            </div>
+            <div class="project-details">
+              <p class="project-status text-sm">
+                <span class="project-name">PlantVision</span>
+                <span class="project-progress"
+                  ><ion-icon
+                    name="hourglass"
+                    class="crafting-project"
+                  ></ion-icon
+                  >Crafting...</span
+                >
+              </p>
+              <p class="text-tertiary project-description">
+                PlantVision uses an EfficientNet vision model to provide instant
+                disease diagnosis from a simple photograph of a plant leaf.
+              </p>
+            </div>
+          </a>
+          <!-- Project 2 -->
+          <a class="project" href="#" style="text-decoration: none">
+            <div class="project-img-container">
+              <img
+                class="project-img"
+                src="/assets/project img placeholder.jpg"
+              />
+            </div>
+            <div class="project-details">
+              <p class="project-status text-sm">
+                <span class="project-name">TinyLinear</span>
+                <span class="project-progress"
+                  ><ion-icon
+                    name="hourglass"
+                    class="crafting-project"
+                  ></ion-icon
+                  >Crafting...</span
+                >
+              </p>
+              <p class="text-tertiary project-description">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Accusantium praesentium incidunt cumque quis excepturi,
+                doloribus voluptate, ex commodi pariatur sint ad eum? Voluptate.
+              </p>
+            </div>
+          </a>
+          <!-- Project 3 -->
+          <!-- <a class="project" href="#" style="text-decoration: none">
+            <div class="project-img-container">
+              <img
+                class="project-img"
+                src="/assets/project img placeholder.jpg"
+              />
+            </div>
+            <div class="project-details">
+              <p class="project-status text-sm">
+                <span class="project-name">Lorem</span>
+                <span class="project-progress"
+                  ><ion-icon
+                    name="hourglass"
+                    class="crafting-project"
+                  ></ion-icon
+                  >Crafting...</span
+                >
+              </p>
+              <p class="text-tertiary project-description">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Accusantium praesentium incidunt cumque quis excepturi,
+                doloribus voluptate, ex commodi pariatur sint ad eum? Voluptate.
+              </p>
+            </div>
+          </a> -->
+          <!-- Project 4 -->
+          <!-- <a class="project" href="#" style="text-decoration: none">
+            <div class="project-img-container">
+              <img
+                class="project-img"
+                src="/assets/project img placeholder.jpg"
+              />
+            </div>
+            <div class="project-details">
+              <p class="project-status text-sm">
+                <span class="project-name">Lorem</span>
+                <span class="project-progress"
+                  ><ion-icon name="checkbox" class="project-live"></ion-icon
+                  >Live</span
+                >
+              </p>
+              <p class="text-tertiary project-description">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Accusantium praesentium incidunt cumque quis excepturi,
+                doloribus voluptate, ex commodi pariatur sint ad eum? Voluptate.
+              </p>
+            </div>
+          </a> -->
+        </div>
+        <div class="center-container">
+          <div class="all-section">
+            <a class="btn-large btn-all-section"
+              >View all<span
+                class="material-symbols-outlined all-section-arrow icon-sm"
+              >
+                arrow_outward
+              </span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container" id="blog-section">
+        <div class="dot-grid-banner-md"></div>
+      </div>
+
+      <!-- BLOG -->
+      <section class="container margin-bottom-sm">
+        <h2 class="heading-primary">Blog</h2>
+        <div class="blog-container margin-bottom-sm">
+          <!-- BLOG 1 -->
+          <div class="blog">
+            <div class="blog-box">
+              <div class="blog-img-details">
+                <div class="blog-img-container">
+                  <img
+                    src="./assets/project img placeholder.jpg"
+                    class="blog-img"
+                    alt="blog-image-placeholder"
+                  />
+                </div>
+                <div class="blog-details">
+                  <p class="blog-title text-sm">
+                    The Anatomy of a Professional Machine Learning Project
+                  </p>
+                  <p class="blog-description text-tertiary">
+                    A Guide to Structure and Sanity
+                  </p>
+                  <div class="tags-container">
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="calendar-container">
+                <p class="text-tertiary btn-icon-pair">
+                  <ion-icon class="icon-sm" name="calendar"></ion-icon
+                  ><span>03/02/2026</span>
+                </p>
+                <div class="blog-arrow">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden-blog-preview text-sm">
+              <p>
+                Every machine learning practitioner starts the same way, a
+                single Python script or a Jupyter Notebook. It works! You can
+                load data, train a model, and see the results. But the moment
+                you try to add a feature, or try to deploy your model, the house
+                of cards collapses. You're hit with a ton of errors,
+                ModuleNotFoundError, FileNotFoundError, or even RunTimeErrors.
+              </p>
+              <div class="hidden-blog-button margin-top-sm">
+                <div class="center-container">
+                  <!-- <div class="all-section"> -->
+                  <a
+                    class="btn-large btn-all-section"
+                    href="https://www.kaggle.com/discussions/general/589305"
+                    >Read more<ion-icon
+                      name="arrow-forward-outline"
+                      class="icon-sm all-section-arrow"
+                    ></ion-icon
+                  ></a>
+                  <!-- </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- BLOG 2 -->
+          <!-- <div class="blog">
+            <div class="blog-box">
+              <div class="blog-img-details">
+                <div class="blog-img-container">
+                  <img
+                    src="./assets/project img placeholder.jpg"
+                    class="blog-img"
+                    alt="blog-image-placeholder"
+                  />
+                </div>
+                <div class="blog-details">
+                  <p class="blog-title text-sm">Lorem</p>
+                  <p class="blog-description text-tertiary">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                  <div class="tags-container">
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="calendar-container">
+                <p class="text-tertiary btn-icon-pair">
+                  <ion-icon class="icon-sm" name="calendar"></ion-icon
+                  ><span>03/02/2026</span>
+                </p>
+                <div class="blog-arrow">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </div>
+              </div>
+            </div> -->
+
+          <!-- <div class="hidden-blog-preview text-sm">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+                nostrum suscipit vero repudiandae dignissimos error quisquam
+                labore laudantium earum blanditiis facilis, quaerat aliquam. Ad
+                sapiente at praesentium fugit quae impedit?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Molestias natus labore a velit consectetur dolores maiores fuga
+                doloremque, quis esse numquam dolorem error, officiis minus
+                deserunt fugiat enim distinctio neque.
+              </p>
+              <div class="hidden-blog-button margin-top-sm">
+                <div class="center-container">
+                  <div class="all-section">
+                    <a class="btn-large btn-all-section"
+                      >Read more<ion-icon
+                        name="arrow-forward-outline"
+                        class="icon-sm all-section-arrow"
+                      ></ion-icon
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+        </div>
+        <!-- BLOG 3 -->
+        <!-- <div class="blog open">
+            <div class="blog-box">
+              <div class="blog-img-details">
+                <div class="blog-img-container">
+                  <img
+                    src="./assets/project img placeholder.jpg"
+                    class="blog-img"
+                    alt="blog-image-placeholder"
+                  />
+                </div>
+                <div class="blog-details">
+                  <p class="blog-title text-sm">Lorem</p>
+                  <p class="blog-description text-tertiary">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                  <div class="tags-container">
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                    <div class="tag">
+                      <p class="text-tertiary tag-name">Data</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="calendar-container">
+                <p class="text-tertiary btn-icon-pair">
+                  <ion-icon class="icon-sm" name="calendar"></ion-icon
+                  ><span>03/02/2026</span>
+                </p>
+                <div class="blog-arrow">
+                  <ion-icon name="arrow-down"></ion-icon>
+                </div>
+              </div>
+            </div>
+
+            <div class="hidden-blog-preview text-sm">
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
+                nostrum suscipit vero repudiandae dignissimos error quisquam
+                labore laudantium earum blanditiis facilis, quaerat aliquam. Ad
+                sapiente at praesentium fugit quae impedit?
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Molestias natus labore a velit consectetur dolores maiores fuga
+                doloremque, quis esse numquam dolorem error, officiis minus
+                deserunt fugiat enim distinctio neque.
+              </p>
+
+              <div class="hidden-blog-button margin-top-sm">
+                <a class="btn-large btn-blog"
+                  >Read more<ion-icon
+                    name="arrow-forward-outline"
+                    class="icon-sm blog-preview-arrow"
+                  ></ion-icon
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="center-container">
+          <div class="all-section">
+            <a class="btn-large btn-all-section"
+              >View all<span
+                class="material-symbols-outlined all-section-arrow icon-sm"
+              >
+                arrow_outward
+              </span></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Dots -->
+      <div class="container">
+        <div class="dot-grid-banner-md"></div>
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <div class="social-links-container margin-bottom-sm">
+          <a href="https://x.com/Muhumuzadeus5">
+            <i class="devicon-twitter-original icon-md"></i>
+          </a>
+          <a href="https://www.kaggle.com/muhumuzadeusai">
+            <i class="devicon-kaggle-original icon-md"></i>
+          </a>
+          <a href="https://www.youtube.com/@deusproject">
+            <ion-icon name="logo-youtube" class="icon-md"></ion-icon>
+          </a>
+          <a href="https://wa.me/+256776646758">
+            <ion-icon name="logo-whatsapp" class="icon-md"></ion-icon>
+          </a>
+        </div>
+        <div class="quote-container">
+          <div class="quote-icon-container">
+            <span class="material-symbols-outlined quote-icon"
+              >format_quote</span
+            >
+          </div>
+          <p class="quote text-lg">"Do it in spite of fear"</p>
+          <p class="quote-origin text-sm">-Elon Musk-</p>
+          <p class="copyright-text text-tertiary margin-top-sm">
+            &copy; <span>2026 </span>Muhumuza Deus. All Rights Reserved
+          </p>
+        </div>
+      </footer>
+    </main>
+    <!-- DOTS DESIGN BOTTOM -->
+    <div class="container">
+      <div class="dot-grid-banner-lg"></div>
+    </div>
+  </body>
+</html>
