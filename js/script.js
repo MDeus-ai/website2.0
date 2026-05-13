@@ -1,4 +1,4 @@
-const GITHUB_USERNAME = "MDeus-ai"; // <-- CHANGE THIS
+const GITHUB_USERNAME = "MDeus-ai";
 
 async function fetchGitHubData() {
   const container = document.getElementById("graph-container");
