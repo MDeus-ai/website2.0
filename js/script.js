@@ -219,3 +219,89 @@ function updateTimeAndStatus() {
 updateVisitCount();
 updateTimeAndStatus();
 setInterval(updateTimeAndStatus, 60000); // Update every minute
+
+// =======================
+// PROFILE IMAGE SHUFFLE
+// =======================
+
+(function () {
+  const profileImages = [
+    "assets/me.jpg",
+    "assets/me-pixel.png",
+    "assets/me-anime.png",
+    "assets/me-cyberpunk.png",
+  ];
+
+  let currentIndex = 0;
+  const heroImg = document.querySelector(".hero-img");
+  const shuffleBtn = document.querySelector(".change-img-btn");
+
+  if (!heroImg || !shuffleBtn) return;
+
+  // Preload all images so transitions are instant
+  profileImages.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+
+  // --- Retro Sound Effect via Web Audio API ---
+  function playRetroSound() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+      // Main "shuffle" blip — short square wave sweep
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = "square";
+      osc1.frequency.setValueAtTime(800, ctx.currentTime);
+      osc1.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.1);
+      gain1.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.15);
+
+      // Secondary "click" blip — higher pitch confirmation
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = "square";
+      osc2.frequency.setValueAtTime(1200, ctx.currentTime + 0.08);
+      osc2.frequency.exponentialRampToValueAtTime(600, ctx.currentTime + 0.16);
+      gain2.gain.setValueAtTime(0.1, ctx.currentTime + 0.08);
+      gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.2);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(ctx.currentTime + 0.08);
+      osc2.stop(ctx.currentTime + 0.2);
+
+      // Clean up context after sounds finish
+      setTimeout(() => ctx.close(), 500);
+    } catch (e) {
+      // Web Audio not supported — silently skip
+    }
+  }
+
+  // --- Glitch Transition ---
+  function applyGlitchTransition(imgEl, newSrc) {
+    // Add glitch class
+    imgEl.classList.add("img-glitch");
+
+    // Swap the image halfway through the glitch
+    setTimeout(() => {
+      imgEl.src = newSrc;
+    }, 150);
+
+    // Remove glitch class after animation completes
+    setTimeout(() => {
+      imgEl.classList.remove("img-glitch");
+    }, 400);
+  }
+
+  // --- Click handler ---
+  shuffleBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % profileImages.length;
+    playRetroSound();
+    applyGlitchTransition(heroImg, profileImages[currentIndex]);
+  });
+})();

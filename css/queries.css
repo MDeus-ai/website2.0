@@ -199,16 +199,22 @@
   }
 
   .about-buttons {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .call-email-container {
-    justify-content: space-between;
+    flex: 1;
+  }
+
+  .call-email-container a {
+    display: block;
+    width: 100%;
   }
 
   .btn-large,
   .btn-large-inverted {
     text-align: center;
+    flex: 1;
   }
 
   .technologies-container {

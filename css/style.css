@@ -114,6 +114,53 @@
   border: 2px solid var(--text-secondary);
 }
 
+/* Glitch transition for profile image shuffle */
+.img-glitch {
+  animation: glitch-effect 0.4s steps(4) forwards;
+}
+
+@keyframes glitch-effect {
+  0% {
+    filter: brightness(1) hue-rotate(0deg);
+    transform: translate(0);
+  }
+  10% {
+    filter: brightness(1.8) hue-rotate(90deg) saturate(3);
+    transform: translate(-2px, 1px);
+    clip-path: inset(20% 0 30% 0);
+  }
+  20% {
+    filter: brightness(0.4) hue-rotate(-60deg);
+    transform: translate(3px, -1px);
+    clip-path: inset(50% 0 10% 0);
+  }
+  30% {
+    filter: brightness(2) hue-rotate(180deg) saturate(5);
+    transform: translate(-1px, 2px);
+    clip-path: inset(10% 0 60% 0);
+  }
+  50% {
+    filter: brightness(0) hue-rotate(0deg);
+    transform: translate(0);
+    clip-path: inset(0);
+  }
+  60% {
+    filter: brightness(1.5) hue-rotate(45deg) saturate(2);
+    transform: translate(2px, -2px);
+    clip-path: inset(40% 0 20% 0);
+  }
+  80% {
+    filter: brightness(1.2) hue-rotate(0deg);
+    transform: translate(-1px, 0);
+    clip-path: inset(0);
+  }
+  100% {
+    filter: brightness(1) hue-rotate(0deg);
+    transform: translate(0);
+    clip-path: inset(0);
+  }
+}
+
 .name-roles-status {
   padding-left: 2rem;
 }
@@ -195,6 +242,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  width: 100%;
 }
 
 .tech-stack {
