@@ -162,16 +162,88 @@
       <section class="container">
         <div class="about-contents">
           <p class="about-me text-sm margin-bottom-sm">
-            I am a mathematical researcher and systems engineer with a BSc in
-            Statistics from Kyambogo University. My work focuses on the
-            intersection of mathematical statistics and hardware-level
-            execution. I am currently a Research Intern at the Infectious
-            Diseases Institute (IDI) Mulago, where I apply rigorous statistical
-            modeling to complex epidemiological datasets. My technical focus is
-            on bypassing high-level abstractions to understand the physics of
-            computation translating statistical algorithms into performant C++,
-            JAX, and CUDA.
+            I am a researcher and systems engineer. My technical focus is on
+            bypassing high-level abstractions to understand the physics of
+            computation.
           </p>
+
+          <div class="timeline" id="resume-timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3 class="timeline-date text-sm">Present</h3>
+                <h4 class="timeline-title text-md">Research Intern</h4>
+                <p class="timeline-org text-sm text-tertiary">
+                  Infectious Diseases Institute (IDI) Mulago
+                </p>
+                <p class="timeline-desc text-sm">
+                  Applying rigorous statistical modeling to complex
+                  epidemiological datasets and translating statistical
+                  algorithms into performant C++, JAX, and CUDA.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3 class="timeline-date text-sm">2026</h3>
+                <h4 class="timeline-title text-md">BSc in Statistics</h4>
+                <p class="timeline-org text-sm text-tertiary">
+                  Kyambogo University
+                </p>
+                <p class="timeline-desc text-sm">
+                  Focused on the intersection of mathematical statistics and its
+                  applications to data science
+                </p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <h3 class="timeline-date text-sm">2024</h3>
+                <h4 class="timeline-title text-md">
+                  Machine Learning Engineer (Freelance)
+                </h4>
+                <p class="timeline-org text-sm text-tertiary">
+                  Various Clients
+                </p>
+                <p class="timeline-desc text-sm">
+                  Developed custom ML solutions including computer vision
+                  pipelines and predictive modeling systems.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-hidden-wrapper">
+              <div class="timeline-hidden-inner">
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h3 class="timeline-date text-sm">2022</h3>
+                    <h4 class="timeline-title text-md">
+                      Uganda Advanced Certificate of Education
+                    </h4>
+                    <p class="timeline-org text-sm text-tertiary">
+                      High School
+                    </p>
+                    <p class="timeline-desc text-sm">
+                      Specialized in Physics, FIne Art, and Mathematics (PAM).
+                    </p>
+                  </div>
+                </div>
+                <!-- <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-content">
+                    <h3 class="timeline-date text-sm">2020</h3>
+                    <h4 class="timeline-title text-md">Uganda Certificate of Education</h4>
+                    <p class="timeline-org text-sm text-tertiary">High School</p>
+                    <p class="timeline-desc text-sm">Completed ordinary level education with distinction across all core science subjects.</p>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
           <div class="about-buttons">
             <div class="call-email-container">
               <a href="mailto:muhumuzadeus7@gmail.com">
@@ -181,9 +253,17 @@
                 </button>
               </a>
             </div>
-            <button class="btn-large-inverted btn-icon-pair">
-              <ion-icon class="icon-sm" name="document"></ion-icon>
-              <span>Resume</span>
+            <button
+              class="btn-large-inverted btn-icon-pair btn-resume-expand"
+              id="resume-expand-btn"
+            >
+              <span class="resume-expand-text">View full resume</span>
+              <span
+                class="material-symbols-outlined icon-sm resume-expand-icon"
+                style="transition: transform 0.3s ease"
+              >
+                arrow_drop_down
+              </span>
             </button>
           </div>
         </div>
@@ -359,6 +439,23 @@
             "
             loading="lazy"
           ></iframe>
+          <iframe
+            data-testid="embed-iframe"
+            style="border-radius: 12px"
+            src="https://open.spotify.com/embed/playlist/6Q6WOczR7ayKNjfzfUbeAz?utm_source=generator&theme=0&si=d4631b7c95bd4fa0"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allowfullscreen=""
+            allow="
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              fullscreen;
+              picture-in-picture;
+            "
+            loading="lazy"
+          ></iframe>
         </div>
       </section>
 
@@ -387,11 +484,8 @@
               <p class="project-status text-sm">
                 <span class="project-name">PlantVision</span>
                 <span class="project-progress"
-                  ><ion-icon
-                    name="hourglass"
-                    class="crafting-project"
-                  ></ion-icon
-                  >Crafting...</span
+                  ><ion-icon name="warning" class="crafting-project"></ion-icon
+                  >Deprecated</span
                 >
               </p>
               <p class="text-tertiary project-description">
@@ -401,7 +495,7 @@
             </div>
           </a>
           <!-- Project 2 -->
-          <a class="project" href="#" style="text-decoration: none">
+          <!-- <a class="project" href="#" style="text-decoration: none">
             <div class="project-img-container">
               <img
                 class="project-img"
@@ -425,7 +519,7 @@
                 doloribus voluptate, ex commodi pariatur sint ad eum? Voluptate.
               </p>
             </div>
-          </a>
+          </a> -->
           <!-- Project 3 -->
           <!-- <a class="project" href="#" style="text-decoration: none">
             <div class="project-img-container">
@@ -518,13 +612,10 @@
                   </p>
                   <div class="tags-container">
                     <div class="tag">
-                      <p class="text-tertiary tag-name">Data</p>
+                      <p class="text-tertiary tag-name">data science</p>
                     </div>
                     <div class="tag">
-                      <p class="text-tertiary tag-name">Data</p>
-                    </div>
-                    <div class="tag">
-                      <p class="text-tertiary tag-name">Data</p>
+                      <p class="text-tertiary tag-name">machine learning</p>
                     </div>
                   </div>
                 </div>

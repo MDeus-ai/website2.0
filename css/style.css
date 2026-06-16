@@ -219,6 +219,99 @@
   gap: 1rem;
 }
 
+/* ======================== */
+/* ========TIMELINE======== */
+/* ======================== */
+
+.timeline {
+  border-left: 2px solid var(--card-border);
+  padding-left: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+/* Fade effect on the last visible item before expansion */
+.timeline:not(.open) > .timeline-item:nth-of-type(3) .timeline-content {
+  mask-image: linear-gradient(to bottom, black 20%, transparent 110%);
+  -webkit-mask-image: linear-gradient(to bottom, black 20%, transparent 110%);
+}
+
+.timeline-hidden-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-out;
+}
+
+.timeline.open .timeline-hidden-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.timeline-hidden-inner {
+  overflow: hidden;
+  padding-left: 2.5rem;
+  margin-left: -2.5rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -1.9375rem;
+  top: 0.1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--bg-body);
+  border: 2px solid var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.btn-resume-expand:hover .resume-expand-icon {
+  transform: translateY(2px);
+}
+
+.btn-resume-expand.is-open:hover .resume-expand-icon {
+  transform: translateY(-2px);
+}
+
+.timeline-item:hover .timeline-dot {
+  background-color: var(--text-secondary);
+  box-shadow: 0 0 10px var(--text-secondary);
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.timeline-date {
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.timeline-title {
+  color: var(--text-main);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.timeline-org {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.timeline-desc {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
 /* ========================== */
 /* ==========SKILLS========== */
 /* ========================== */

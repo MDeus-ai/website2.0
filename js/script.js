@@ -4,68 +4,93 @@ async function fetchGitHubData() {
   const container = document.getElementById("graph-container");
   const countLabel = document.getElementById("count-label");
 
+  // Dynamically get the current year so you don't have to update this in 2027
+  const currentYear = new Date().getFullYear();
+
   try {
-    // Using a highly stable alternative API
     const response = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`,
+      `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=${currentYear}`,
     );
-
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
     const data = await response.json();
 
-    // 1. Set the count text
-    countLabel.innerText = `${data.total.lastYear} activities in 2025`;
+    // Total count using the dynamic year
+    countLabel.innerText = `${data.total[currentYear]} contributions in ${currentYear}`;
 
-    // 2. Start building SVG
-    let svg = `<svg viewBox="0 0 780 120" width="100%">`;
+    const contributions = data.contributions; // array of {date, count, level}
 
-    // Month Labels (Simplified positioning)
-    const months = [
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-      "Jan",
-    ];
-    months.forEach((m, i) => {
-      svg += `<text x="${i * 64}" y="12" class="m-label">${m}</text>`;
+    // --- Build a week-based grid ---
+    // Find the day-of-week (0=Sun) of the first contribution
+    const firstDate = new Date(contributions[0].date);
+    const startDayOfWeek = firstDate.getDay(); // 0=Sun, 1=Mon...
+
+    // Group into columns (weeks), padding the first week
+    const weeks = [];
+    let currentWeek = new Array(startDayOfWeek).fill(null); // empty slots before first day
+
+    contributions.forEach((day) => {
+      const dow = new Date(day.date).getDay();
+      if (dow === 0 && currentWeek.length > 0) {
+        // Sunday starts a new week
+        while (currentWeek.length < 7) currentWeek.push(null);
+        weeks.push(currentWeek);
+        currentWeek = [];
+      }
+      currentWeek.push(day);
+    });
+    // Push the last partial week
+    if (currentWeek.length > 0) {
+      while (currentWeek.length < 7) currentWeek.push(null);
+      weeks.push(currentWeek);
+    }
+
+    const CELL = 13; // cell size + gap
+    const TOP = 22; // space for month labels
+    const svgW = weeks.length * CELL;
+    const svgH = 7 * CELL + TOP;
+
+    // --- Month labels ---
+    let monthLabels = "";
+    let lastMonth = -1;
+    weeks.forEach((week, wi) => {
+      const firstReal = week.find((d) => d !== null);
+      if (!firstReal) return;
+      const month = new Date(firstReal.date).getMonth();
+      if (month !== lastMonth) {
+        const monthName = new Date(firstReal.date).toLocaleString("default", {
+          month: "short",
+        });
+        monthLabels += `<text x="${wi * CELL}" y="12" class="m-label">${monthName}</text>`;
+        lastMonth = month;
+      }
     });
 
-    // 3. Draw Squares
-    data.contributions.forEach((day, index) => {
-      // Logic to calculate grid position
-      const weekIndex = Math.floor(index / 7);
-      const dayIndex = index % 7;
-      const x = weekIndex * 14;
-      const y = dayIndex * 13 + 25;
-
-      // Map GitHub levels to our Grayscale
-      const colors = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
-      const fillColor = colors[day.level] || colors[0];
-
-      svg += `
-                <rect class="day" width="11" height="11" 
-                      x="${x}" y="${y}" fill="${fillColor}"
-                      data-tippy-content="${day.count} contributions on ${day.date}">
-                </rect>`;
+    // --- Cells ---
+    const colors = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
+    let cells = "";
+    weeks.forEach((week, wi) => {
+      week.forEach((day, di) => {
+        if (!day) return;
+        const x = wi * CELL;
+        const y = di * CELL + TOP;
+        const fill = colors[day.level] ?? colors[0];
+        cells += `<rect class="day" width="11" height="11" x="${x}" y="${y}" 
+          fill="${fill}" rx="2"
+          data-tippy-content="${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}">
+        </rect>`;
+      });
     });
 
-    svg += `</svg>`;
-    container.innerHTML = svg;
+    container.innerHTML = `
+      <svg viewBox="0 0 ${svgW} ${svgH}" width="100%">
+        ${monthLabels}
+        ${cells}
+      </svg>`;
 
-    // 4. Init tooltips
     tippy(".day", { theme: "translucent" });
   } catch (error) {
-    console.error("DETAILED ERROR:", error);
-    container.innerHTML = `<div style="color:red">Error: ${error.message}. Check console for details.</div>`;
+    console.error("GitHub graph error:", error);
+    container.innerHTML = `<div style="color:red">Error: ${error.message}</div>`;
   }
 }
 
@@ -305,3 +330,27 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
     applyGlitchTransition(heroImg, profileImages[currentIndex]);
   });
 })();
+
+// =======================
+// RESUME TIMELINE EXPAND
+// =======================
+const resumeExpandBtn = document.getElementById("resume-expand-btn");
+const resumeTimeline = document.getElementById("resume-timeline");
+
+if (resumeExpandBtn && resumeTimeline) {
+  resumeExpandBtn.addEventListener("click", () => {
+    resumeTimeline.classList.toggle("open");
+    resumeExpandBtn.classList.toggle("is-open");
+
+    const textSpan = resumeExpandBtn.querySelector(".resume-expand-text");
+    const iconSpan = resumeExpandBtn.querySelector(".resume-expand-icon");
+
+    if (resumeTimeline.classList.contains("open")) {
+      textSpan.textContent = "Show less";
+      iconSpan.textContent = "arrow_drop_up";
+    } else {
+      textSpan.textContent = "View full resume";
+      iconSpan.textContent = "arrow_drop_down";
+    }
+  });
+}
