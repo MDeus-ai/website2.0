@@ -89,7 +89,8 @@
 .hero-container {
   /* We might need a light mode version of the banner or an overlay */
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.5)), url("../assets/banner.png");
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/banner.png");
   background-size: cover;
   height: 15rem;
   width: 100%;
@@ -168,6 +169,39 @@
 .change-img-btn {
   position: absolute;
   transform: translate(1000%, -300%);
+  padding: 0;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  isolation: isolate; /* Create stacking context for pseudo-element */
+}
+
+.change-img-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.2rem;
+  height: 2.2rem;
+  background-color: color-mix(in srgb, var(--text-secondary), transparent 80%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: -1;
+}
+
+.change-img-btn:hover {
+  color: var(--text-main) !important;
+}
+
+.change-img-btn:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 .roles {
@@ -339,9 +373,10 @@
 }
 
 .tech-stack {
-  /* FLEX */
-  display: flex;
-  flex-direction: column;
+  /* GRID */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem;
   border: 2px solid var(--card-border);
   background-color: var(--card-bg);
   border-radius: 0.5rem;
@@ -351,13 +386,6 @@
 
 .group-name {
   margin-bottom: 0.3rem;
-}
-
-.tech-stack {
-  /* GRID */
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.2rem;
 }
 
 .tech:link,
@@ -554,18 +582,26 @@ body.light-mode .m-label {
 
 .project-progress {
   /* FLEX */
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.8rem;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 0.15rem 0.55rem;
+  border-radius: 100px;
+  border: 1px solid color-mix(in srgb, var(--card-border), transparent 30%);
+  background: color-mix(in srgb, var(--card-bg), transparent 40%);
 }
 
 .crafting-project {
-  color: #ff7f11;
+  color: #e8872e;
+  font-size: 0.7rem;
 }
 
 .project-live {
-  color: #08cb00;
+  color: #3cd53a;
+  font-size: 0.7rem;
 }
 
 /* ======================== */
@@ -640,15 +676,38 @@ body.light-mode .m-label {
 }
 
 .tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.65rem;
+  width: fit-content;
+  border: 1px solid color-mix(in srgb, var(--text-secondary), transparent 80%);
+  background: color-mix(in srgb, var(--text-secondary), transparent 90%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 100px;
+
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.tag:hover {
+  background: color-mix(in srgb, var(--text-secondary), transparent 80%);
+  border-color: color-mix(in srgb, var(--text-secondary), transparent 50%);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--text-secondary), transparent 90%);
+}
+
+.tag-name {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  align-items: center;
-  padding: 1px 4px;
-  width: fit-content;
-  border: 1.5px solid var(--card-border);
-  background-color: var(--text-secondary);
-  border-radius: 0.3rem;
+  gap: 0.3rem;
+  color: var(--text-secondary) !important;
+  font-weight: 600;
+  font-size: 0.65rem;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
 }
 
 .calendar-container {
@@ -710,23 +769,46 @@ body.light-mode .m-label {
 }
 
 .hidden-blog-button {
-  display: flex;
+  display: inline-flex;
   width: fit-content;
-  border-radius: 9px;
+  border-radius: 100px;
   border: 1px solid var(--card-border);
-  padding: 2px;
+  padding: 3px;
   line-height: 1;
-  transform: scale(0.8);
-  transform-origin: left;
+
+  /* ANIMATE */
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hidden-blog-button:hover {
+  border-color: var(--text-main);
+  background-color: var(--text-main);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
 .btn-blog {
   display: flex;
   align-items: center;
   justify-content: start;
-  gap: 0.2rem;
+  gap: 0.35rem;
   margin: 0;
   line-height: 1;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+  text-decoration: none;
+
+  transition: color 0.25s ease;
+}
+
+.hidden-blog-button:hover .btn-blog {
+  color: var(--btn-text-color);
 }
 
 .blog-preview-arrow {
@@ -736,7 +818,7 @@ body.light-mode .m-label {
 }
 
 .btn-blog:hover .blog-preview-arrow {
-  transform: translateX(1.8px);
+  transform: translateX(2px);
 }
 
 /* ========================= */

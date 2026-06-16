@@ -228,6 +228,10 @@
   .quote {
     font-size: 1.5rem;
   }
+
+  .playlist-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* *************************** */
