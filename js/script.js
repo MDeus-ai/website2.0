@@ -258,21 +258,34 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
   ];
 
   let currentIndex = 0;
+  let isAnimating = false;
   const heroImg = document.querySelector(".hero-img");
   const shuffleBtn = document.querySelector(".change-img-btn");
 
   if (!heroImg || !shuffleBtn) return;
 
-  // Preload all images so transitions are instant
-  profileImages.forEach((src) => {
+  // Preload all images and keep references so the browser doesn't GC them
+  const preloadedImages = profileImages.map((src) => {
     const img = new Image();
     img.src = src;
+    return img;
   });
 
-  // --- Retro Sound Effect via Web Audio API ---
+  // --- Reusable AudioContext for retro sound ---
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx || audioCtx.state === "closed") {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    return audioCtx;
+  }
+
   function playRetroSound() {
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = getAudioContext();
+
+      // Resume if suspended (browser autoplay policy)
+      if (ctx.state === "suspended") ctx.resume();
 
       // Main "shuffle" blip — short square wave sweep
       const osc1 = ctx.createOscillator();
@@ -299,16 +312,16 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
       gain2.connect(ctx.destination);
       osc2.start(ctx.currentTime + 0.08);
       osc2.stop(ctx.currentTime + 0.2);
-
-      // Clean up context after sounds finish
-      setTimeout(() => ctx.close(), 500);
     } catch (e) {
       // Web Audio not supported — silently skip
     }
   }
 
-  // --- Glitch Transition ---
+  // --- Glitch Transition (debounced) ---
   function applyGlitchTransition(imgEl, newSrc) {
+    if (isAnimating) return;
+    isAnimating = true;
+
     // Add glitch class
     imgEl.classList.add("img-glitch");
 
@@ -320,11 +333,13 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
     // Remove glitch class after animation completes
     setTimeout(() => {
       imgEl.classList.remove("img-glitch");
+      isAnimating = false;
     }, 400);
   }
 
   // --- Click handler ---
   shuffleBtn.addEventListener("click", () => {
+    if (isAnimating) return;
     currentIndex = (currentIndex + 1) % profileImages.length;
     playRetroSound();
     applyGlitchTransition(heroImg, profileImages[currentIndex]);
