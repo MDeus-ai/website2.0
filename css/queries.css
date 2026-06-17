@@ -152,6 +152,13 @@
     z-index: 100;
   }
 
+  /* Light mode mobile nav — warm frosted glass */
+  body.light-mode .header {
+    background-color: rgba(248, 245, 239, 0.75);
+    border: 1px solid rgba(28, 26, 22, 0.08);
+    box-shadow: 0 4px 30px rgba(28, 26, 22, 0.12);
+  }
+
   .header-nav-list {
     gap: 1.5rem;
     flex-wrap: wrap;

@@ -66,7 +66,11 @@ async function fetchGitHubData() {
     });
 
     // --- Cells ---
-    const colors = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
+    // Pick palette based on current theme
+    const isLight = document.body.classList.contains("light-mode");
+    const darkColors = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
+    const lightColors = ["#ece8e0", "#c9b99a", "#a89060", "#8b7340", "#6b5525"];
+    const colors = isLight ? lightColors : darkColors;
     let cells = "";
     weeks.forEach((week, wi) => {
       week.forEach((day, di) => {
@@ -134,14 +138,21 @@ const lightModeIcon = lightModeBtn.querySelector("ion-icon");
 if (localStorage.getItem("theme") === "light") {
   document.body.classList.add("light-mode");
   lightModeIcon.setAttribute("name", "sunny-outline");
+  // Defer legend update until graph has loaded
+  window.addEventListener("load", () => {
+    updateLegendColors();
+  });
 }
 
 if (lightModeBtn) {
   lightModeBtn.addEventListener("click", () => {
-    // Toggle class
+    // 1. Add transition orchestrator class for smooth cross-fade
+    document.body.classList.add("theme-transitioning");
+
+    // 2. Toggle theme class
     document.body.classList.toggle("light-mode");
 
-    // Toggle Icon AND Save Preference
+    // 3. Toggle Icon AND Save Preference
     if (document.body.classList.contains("light-mode")) {
       lightModeIcon.setAttribute("name", "sunny-outline");
       localStorage.setItem("theme", "light");
@@ -149,6 +160,17 @@ if (lightModeBtn) {
       lightModeIcon.setAttribute("name", "contrast-outline");
       localStorage.setItem("theme", "dark");
     }
+
+    // 4. Update GitHub graph colors for the new theme
+    updateGraphColors();
+
+    // 5. Update legend square colors
+    updateLegendColors();
+
+    // 6. Remove transition class after animation completes
+    setTimeout(() => {
+      document.body.classList.remove("theme-transitioning");
+    }, 550);
   });
 }
 
@@ -366,6 +388,38 @@ if (resumeExpandBtn && resumeTimeline) {
     } else {
       textSpan.textContent = "View full resume";
       iconSpan.textContent = "arrow_drop_down";
+    }
+  });
+}
+
+// =======================
+// THEME-AWARE GRAPH COLORS
+// =======================
+
+const DARK_GRAPH_COLORS = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
+const LIGHT_GRAPH_COLORS = ["#ece8e0", "#c9b99a", "#a89060", "#8b7340", "#6b5525"];
+
+function updateGraphColors() {
+  const isLight = document.body.classList.contains("light-mode");
+  const oldColors = isLight ? DARK_GRAPH_COLORS : LIGHT_GRAPH_COLORS;
+  const newColors = isLight ? LIGHT_GRAPH_COLORS : DARK_GRAPH_COLORS;
+
+  document.querySelectorAll(".day").forEach((rect) => {
+    const currentFill = rect.getAttribute("fill");
+    const idx = oldColors.indexOf(currentFill);
+    if (idx !== -1) {
+      rect.setAttribute("fill", newColors[idx]);
+    }
+  });
+}
+
+function updateLegendColors() {
+  const isLight = document.body.classList.contains("light-mode");
+  const colors = isLight ? LIGHT_GRAPH_COLORS : DARK_GRAPH_COLORS;
+  const squares = document.querySelectorAll(".l-sq");
+  squares.forEach((sq, i) => {
+    if (colors[i]) {
+      sq.style.background = colors[i];
     }
   });
 }

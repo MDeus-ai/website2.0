@@ -99,6 +99,13 @@
   margin-bottom: 5rem;
 }
 
+/* Lighten the banner overlay in light mode */
+body.light-mode .hero-container {
+  background-image:
+    linear-gradient(rgba(248, 245, 239, 0.45), rgba(248, 245, 239, 0.55)),
+    url("../assets/banner.png");
+}
+
 .hero-img-container {
   /* FLEX */
   display: flex;
@@ -378,6 +385,10 @@
   padding: 0.25rem 0.5rem;
 }
 
+body.light-mode .tech-stack {
+  box-shadow: 0 1px 8px rgba(28, 26, 22, 0.06);
+}
+
 .group-name {
   margin-bottom: 0.3rem;
 }
@@ -491,7 +502,7 @@ body.light-mode .tech:hover .text-sm {
 
 /* CSS Override for SVG text if possible */
 body.light-mode .m-label {
-  fill: #555;
+  fill: #7a756b;
 }
 
 .loading {
@@ -527,6 +538,10 @@ body.light-mode .m-label {
   width: 100%;
   border-radius: 0.8rem;
   overflow: hidden;
+}
+
+body.light-mode .project-img-container {
+  box-shadow: 0 2px 12px rgba(28, 26, 22, 0.08);
 }
 
 .project-img {
@@ -872,7 +887,7 @@ body:not(.light-mode) .quote-icon {
   color: #1a1915;
 }
 body.light-mode .quote-icon {
-  color: #f0f0f0;
+  color: #ece8e0;
 }
 
 .quote {
@@ -884,4 +899,49 @@ body.light-mode .quote-icon {
 
 .quote-origin {
   font-style: italic;
+}
+
+/* =============================== */
+/* LIGHT MODE POLISH OVERRIDES     */
+/* =============================== */
+
+/* Blog card hover — warm shadow instead of flat bg */
+body.light-mode .blog-box:hover {
+  background-color: #faf8f3;
+  box-shadow: 0 2px 12px rgba(28, 26, 22, 0.06);
+}
+
+body.light-mode .open .blog-box {
+  background-color: #faf8f3;
+  box-shadow: 0 2px 12px rgba(28, 26, 22, 0.06);
+}
+
+/* Blog image border warmth */
+body.light-mode .blog-img-container {
+  border-color: #e2ddd4;
+}
+
+/* Timeline warmth */
+body.light-mode .timeline {
+  border-left-color: #d8d3c8;
+}
+
+body.light-mode .timeline-dot {
+  border-color: #a89a8a;
+  background-color: #f8f5ef;
+}
+
+body.light-mode .timeline-item:hover .timeline-dot {
+  background-color: #a89a8a;
+  box-shadow: 0 0 10px rgba(168, 154, 138, 0.4);
+}
+
+/* Hidden blog preview border */
+body.light-mode .hidden-blog-preview {
+  border-color: #e2ddd4;
+}
+
+/* Hero image border */
+body.light-mode .hero-img {
+  border-color: #a89a8a;
 }

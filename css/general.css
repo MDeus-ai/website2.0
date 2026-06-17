@@ -76,25 +76,49 @@ Medium: 11px
 }
 
 body.light-mode {
-  /* LIGHT MODE */
-  --bg-body: #fdfbf7; /* Warm off-white */
-  --text-main: #1a1915; /* Dark grey/black */
-  --text-secondary: #323332;
-  --text-tertiary: #444444;
+  /* LIGHT MODE — warm, refined palette */
+  --bg-body: #f8f5ef; /* Warm parchment cream */
+  --text-main: #1c1a16; /* Rich warm black */
+  --text-secondary: #5c574e; /* Warm medium brown-grey */
+  --text-tertiary: #7a756b; /* Muted warm stone */
 
   --card-bg: #ffffff;
-  --card-border: #e5e5e5;
+  --card-border: #e2ddd4; /* Warm tan border */
 
-  --accent-color: #1a1915;
-  --activity-bg: #ffffff;
+  --accent-color: #1c1a16;
+  --activity-bg: #f8f5ef;
 
-  --btn-bg-hover: #1a1915;
-  --btn-text-hover: #f3f3f3;
+  --btn-bg-hover: #1c1a16;
+  --btn-text-hover: #f8f5ef;
 
-  --dots-color: #939290;
-  --dots-transparency: 0.1px;
+  --dots-color: #c9c3b8; /* Warm sand dots */
+  --dots-transparency: 0.3px;
 
-  --btn-text-color: #fdfbf7;
+  --btn-text-color: #f8f5ef;
+}
+
+/* ============================= */
+/* THEME TRANSITION ORCHESTRATOR */
+/* ============================= */
+
+/*
+  Applied temporarily via JS during theme switch.
+  This ensures ALL elements cross-fade their colors smoothly,
+  then the class is removed so normal hover/interaction
+  transitions aren't sluggish.
+*/
+body.theme-transitioning,
+body.theme-transitioning *,
+body.theme-transitioning *::before,
+body.theme-transitioning *::after {
+  transition:
+    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* =================== */
@@ -119,11 +143,6 @@ body {
   font-weight: 400;
   color: var(--text-main);
   background-color: var(--bg-body);
-
-  /* Puts transition on theme switch */
-  transition:
-    background-color 0.3s,
-    color 0.3s;
 }
 
 /* =========================== */
@@ -301,9 +320,11 @@ a {
 body.light-mode .btn-large-inverted,
 body.light-mode .btn-large-inverted:link,
 body.light-mode .btn-large-inverted:visited {
-  background: #eeeeee;
-  border-color: #d5d5d5;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+  background: #f0ece4;
+  border-color: #d8d3c8;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 @media (hover: hover) {
@@ -319,8 +340,11 @@ body.light-mode .btn-large-inverted:visited {
   }
 
   body.light-mode .btn-large-inverted:hover {
-    background: #e2e2e2;
-    border-color: #bbb;
+    background: #e6e1d6;
+    border-color: #b8b2a6;
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+      0 4px 16px rgba(28, 26, 22, 0.1);
   }
 }
 
@@ -333,8 +357,8 @@ body.light-mode .btn-large-inverted:visited {
 }
 
 body.light-mode .btn-large-inverted:active {
-  background: #e2e2e2;
-  border-color: #bbb;
+  background: #e6e1d6;
+  border-color: #b8b2a6;
 }
 
 /* ======================== */
