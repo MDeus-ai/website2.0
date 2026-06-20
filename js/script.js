@@ -600,6 +600,18 @@ if (activitiesExpandBtn && activitiesHiddenWrapper) {
     } else {
       if (textSpan) textSpan.textContent = "View more activities";
       if (iconSpan) iconSpan.textContent = "arrow_drop_down";
+      
+      // Close playlists if they are open when activities are minimized
+      if (playlistGrid && playlistGrid.classList.contains("open")) {
+        playlistGrid.classList.remove("open");
+        if (playlistExpandBtn) {
+          playlistExpandBtn.classList.remove("is-open");
+          const pText = playlistExpandBtn.querySelector(".playlist-expand-text");
+          const pIcon = playlistExpandBtn.querySelector(".playlist-expand-icon");
+          if (pText) pText.textContent = "View more playlists";
+          if (pIcon) pIcon.textContent = "arrow_drop_down";
+        }
+      }
     }
   });
 }
