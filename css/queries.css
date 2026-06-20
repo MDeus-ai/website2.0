@@ -239,6 +239,19 @@
   .playlist-grid {
     grid-template-columns: 1fr;
   }
+
+  .playlist-grid.open {
+    max-height: 850px; /* Tightly bound to 5 rows of height 152px + gap */
+  }
+
+  .playlist-grid:not(.open) > iframe:nth-child(2) {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .playlist-grid:not(.open) > iframe:nth-child(1) {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
 }
 
 /* *************************** */

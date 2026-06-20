@@ -548,6 +548,13 @@ body.light-mode .btn-large-inverted:active {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  max-height: 152px;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+.playlist-grid.open {
+  max-height: 500px; /* Tightly bound to 3 rows of height 152px + gap */
 }
 
 .my-name {
@@ -559,3 +566,60 @@ body.light-mode .btn-large-inverted:active {
   color: var(--text-secondary);
   opacity: 0.6;
 }
+
+/* ======================== */
+/* PLAYLIST GRID LOGIC      */
+/* ======================== */
+
+/* Fade mask on the visible playlists on desktop */
+.playlist-grid:not(.open) > iframe:nth-child(1),
+.playlist-grid:not(.open) > iframe:nth-child(2) {
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+}
+
+.btn-playlist-expand .playlist-expand-icon {
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) {
+  .btn-playlist-expand:hover .playlist-expand-icon {
+    transform: translateY(2px);
+  }
+  .btn-playlist-expand.is-open:hover .playlist-expand-icon {
+    transform: translateY(-2px);
+  }
+}
+
+/* ======================== */
+/* ACTIVITIES EXPAND LOGIC  */
+/* ======================== */
+
+.activities-hidden-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s ease-out;
+}
+
+.activities-hidden-wrapper.open {
+  grid-template-rows: 1fr;
+}
+
+.activities-hidden-inner {
+  overflow: hidden;
+}
+
+.btn-activities-expand .activities-expand-icon {
+  transition: transform 0.3s ease;
+}
+
+@media (hover: hover) {
+  .btn-activities-expand:hover .activities-expand-icon {
+    transform: translateY(2px);
+  }
+  .btn-activities-expand.is-open:hover .activities-expand-icon {
+    transform: translateY(-2px);
+  }
+}
+
+
