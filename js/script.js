@@ -396,8 +396,20 @@ if (resumeExpandBtn && resumeTimeline) {
 // THEME-AWARE GRAPH COLORS
 // =======================
 
-const DARK_GRAPH_COLORS = ["#161b22", "#393939", "#6e6e6e", "#919191", "#ffffff"];
-const LIGHT_GRAPH_COLORS = ["#ece8e0", "#c9b99a", "#a89060", "#8b7340", "#6b5525"];
+const DARK_GRAPH_COLORS = [
+  "#161b22",
+  "#393939",
+  "#6e6e6e",
+  "#919191",
+  "#ffffff",
+];
+const LIGHT_GRAPH_COLORS = [
+  "#ece8e0",
+  "#c9b99a",
+  "#a89060",
+  "#8b7340",
+  "#6b5525",
+];
 
 function updateGraphColors() {
   const isLight = document.body.classList.contains("light-mode");
@@ -423,3 +435,121 @@ function updateLegendColors() {
     }
   });
 }
+
+// =======================
+// SPOTIFY LANYARD INTEGRATION
+// =======================
+
+// PLEASE REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL DISCORD USER ID
+const DISCORD_ID = "1362785972672139454";
+
+function initLanyard() {
+  const ws = new WebSocket("wss://api.lanyard.rest/socket");
+
+  const spotifyWidget = document.getElementById("spotify-now-playing");
+  const songEl = document.getElementById("spotify-song");
+  const artistEl = document.getElementById("spotify-artist");
+  const artEl = document.getElementById("spotify-album-art");
+  
+  const timeCurrentEl = document.getElementById("spotify-time-current");
+  const timeTotalEl = document.getElementById("spotify-time-total");
+  const progressFillEl = document.getElementById("spotify-progress-fill");
+
+  if (!spotifyWidget) return;
+
+  let spotifyInterval = null;
+
+  function updateProgress(start, end) {
+    if (!start || !end) return;
+    const now = Date.now();
+    const total = end - start;
+    const current = now - start;
+    const percentage = Math.min(Math.max((current / total) * 100, 0), 100);
+
+    const formatTime = (ms) => {
+      const totalSeconds = Math.floor(Math.max(ms, 0) / 1000);
+      const m = Math.floor(totalSeconds / 60);
+      const s = totalSeconds % 60;
+      return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+    };
+
+    if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
+    if (timeCurrentEl) timeCurrentEl.textContent = formatTime(Math.min(current, total));
+    if (timeTotalEl) timeTotalEl.textContent = formatTime(total);
+  }
+
+  ws.onopen = () => {
+    // Send initialization message
+    ws.send(
+      JSON.stringify({
+        op: 2,
+        d: {
+          subscribe_to_id: DISCORD_ID,
+        },
+      }),
+    );
+  };
+
+  ws.onmessage = (event) => {
+    const { t, d, op } = JSON.parse(event.data);
+
+    // Heartbeat logic
+    if (op === 1) {
+      setInterval(() => {
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ op: 3 }));
+        }
+      }, d.heartbeat_interval);
+    }
+
+    if (t === "INIT_STATE" || t === "PRESENCE_UPDATE") {
+      let spotify = d.spotify;
+
+      // --- DEMO MOCK DATA ---
+      // This will show a fake song so you can see the design before you put in your real ID.
+      if (DISCORD_ID === "123456789012345678") {
+        const now = Date.now();
+        spotify = {
+          song: "Blinding Lights",
+          artist: "The Weeknd",
+          album_art_url: "https://i.scdn.co/image/ab67616d0000b2738863bc11d2cb1239ce750fa1",
+          track_id: "0VjIjW4GlUZAMYd2vXMi3b",
+          timestamps: {
+            start: now - 86000, // 1m 26s in
+            end: now + 86000 // Total 2m 52s
+          }
+        };
+      }
+
+      if (spotify) {
+        // User is listening to Spotify
+        songEl.textContent = spotify.song;
+        artistEl.textContent = spotify.artist;
+        artEl.src = spotify.album_art_url;
+
+        spotifyWidget.style.display = "flex";
+
+        // Progress bar logic
+        if (spotifyInterval) clearInterval(spotifyInterval);
+        if (spotify.timestamps && spotify.timestamps.start && spotify.timestamps.end) {
+          updateProgress(spotify.timestamps.start, spotify.timestamps.end);
+          spotifyInterval = setInterval(() => {
+            updateProgress(spotify.timestamps.start, spotify.timestamps.end);
+          }, 1000);
+        }
+
+      } else {
+        // Not listening
+        spotifyWidget.style.display = "none";
+        if (spotifyInterval) clearInterval(spotifyInterval);
+      }
+    }
+  };
+
+  ws.onclose = () => {
+    console.log("Lanyard WebSocket closed, reconnecting in 5s...");
+    setTimeout(initLanyard, 5000);
+  };
+}
+
+initLanyard();

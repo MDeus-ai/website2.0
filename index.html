@@ -425,6 +425,29 @@
             </div>
           </div>
         </div>
+
+        <!-- SPOTIFY CURRENTLY PLAYING -->
+        <div class="spotify-now-playing margin-bottom-sm" id="spotify-now-playing" style="display: none;">
+          <div class="spotify-header">
+            <span class="spotify-status-text">Listening to Spotify</span>
+            <ion-icon name="logo-spotify" class="spotify-logo"></ion-icon>
+          </div>
+          <div class="spotify-content">
+            <img src="" alt="Album Art" id="spotify-album-art" class="spotify-album-art" />
+            <div class="spotify-info">
+              <p class="spotify-song" id="spotify-song"></p>
+              <p class="spotify-artist" id="spotify-artist"></p>
+              <div class="spotify-progress-container">
+                <span id="spotify-time-current" class="spotify-time">00:00</span>
+                <div class="spotify-progress-bar">
+                  <div id="spotify-progress-fill" class="spotify-progress-fill"></div>
+                </div>
+                <span id="spotify-time-total" class="spotify-time">00:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p class="heading-secondary">Spotify Playlists</p>
         <div class="playlist-grid">
           <iframe

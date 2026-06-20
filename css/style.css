@@ -945,3 +945,117 @@ body.light-mode .hidden-blog-preview {
 body.light-mode .hero-img {
   border-color: #a89a8a;
 }
+
+/* =================================== */
+/* ==========SPOTIFY LANYARD========== */
+/* =================================== */
+
+.spotify-now-playing {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+body.light-mode .spotify-now-playing {
+  box-shadow: 0 2px 12px rgba(28, 26, 22, 0.08);
+}
+
+.spotify-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1rem 0 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.spotify-logo {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.spotify-content {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem 1rem 1rem;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.3s ease;
+}
+
+.spotify-content:hover {
+  background-color: color-mix(in srgb, var(--text-main), transparent 97%);
+}
+
+.spotify-album-art {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.spotify-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  text-align: left;
+}
+
+.spotify-song {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.1rem;
+}
+
+.spotify-artist {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0.5rem;
+}
+
+.spotify-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.spotify-time {
+  min-width: 35px;
+  text-align: center;
+}
+
+.spotify-progress-bar {
+  flex-grow: 1;
+  height: 4px;
+  background-color: color-mix(in srgb, var(--text-secondary), transparent 70%);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.spotify-progress-fill {
+  height: 100%;
+  background-color: var(--text-main);
+  width: 0%;
+  border-radius: 2px;
+  /* Smooth transition for continuous updates */
+  transition: width 1s linear;
+}
