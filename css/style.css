@@ -305,11 +305,11 @@ body.light-mode .hero-container {
 }
 
 .btn-resume-expand:hover .resume-expand-icon {
-  transform: translateY(2px);
+  animation: hover-bounce-down 1.2s infinite ease-in-out;
 }
 
 .btn-resume-expand.is-open:hover .resume-expand-icon {
-  transform: translateY(-2px);
+  animation: hover-bounce-up 1.2s infinite ease-in-out;
 }
 
 .timeline-item:hover .timeline-dot {

@@ -332,20 +332,21 @@ body.light-mode .btn-large-inverted:visited {
     color: var(--text-main);
     border-color: var(--text-main);
     background: color-mix(in srgb, var(--card-bg), transparent 10%);
-    transform: translateY(-1px);
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
-      0 6px 20px rgba(0, 0, 0, 0.2);
-
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   }
 
   body.light-mode .btn-large-inverted:hover {
     background: #e6e1d6;
     border-color: #b8b2a6;
-    box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
-      0 4px 16px rgba(28, 26, 22, 0.1);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
   }
+}
+
+.btn-playlist-expand,
+.btn-activities-expand,
+.btn-resume-expand {
+  width: 250px;
+  justify-content: center;
 }
 
 .btn-large-inverted:active {
@@ -582,12 +583,22 @@ body.light-mode .btn-large-inverted:active {
   transition: transform 0.3s ease;
 }
 
+@keyframes hover-bounce-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+@keyframes hover-bounce-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 @media (hover: hover) {
   .btn-playlist-expand:hover .playlist-expand-icon {
-    transform: translateY(2px);
+    animation: hover-bounce-down 1.2s infinite ease-in-out;
   }
   .btn-playlist-expand.is-open:hover .playlist-expand-icon {
-    transform: translateY(-2px);
+    animation: hover-bounce-up 1.2s infinite ease-in-out;
   }
 }
 
@@ -615,10 +626,10 @@ body.light-mode .btn-large-inverted:active {
 
 @media (hover: hover) {
   .btn-activities-expand:hover .activities-expand-icon {
-    transform: translateY(2px);
+    animation: hover-bounce-down 1.2s infinite ease-in-out;
   }
   .btn-activities-expand.is-open:hover .activities-expand-icon {
-    transform: translateY(-2px);
+    animation: hover-bounce-up 1.2s infinite ease-in-out;
   }
 }
 
