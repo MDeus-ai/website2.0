@@ -986,12 +986,9 @@ body.light-mode .spotify-now-playing {
   gap: 1rem;
   text-decoration: none;
   color: inherit;
-  transition: background-color 0.3s ease;
 }
 
-.spotify-content:hover {
-  background-color: color-mix(in srgb, var(--text-main), transparent 97%);
-}
+
 
 .spotify-album-art {
   width: 60px;
