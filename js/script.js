@@ -504,6 +504,26 @@ function initLanyard() {
 
     if (t === "INIT_STATE" || t === "PRESENCE_UPDATE") {
       let spotify = d.spotify;
+      const discordStatus = d.discord_status;
+      
+      const statusIcon = document.querySelector(".status-indicator");
+      const statusText = document.querySelector(".status-text");
+
+      if (statusIcon && statusText) {
+        if (discordStatus === "online") {
+          statusIcon.style.color = "#2ecc71";
+          statusText.textContent = "Online";
+        } else if (discordStatus === "dnd") {
+          statusIcon.style.color = "#e74c3c";
+          statusText.textContent = "Do Not Disturb";
+        } else if (discordStatus === "idle") {
+          statusIcon.style.color = "#f1c40f";
+          statusText.textContent = "Idle";
+        } else {
+          statusIcon.style.color = "#e74c3c";
+          statusText.textContent = "Offline";
+        }
+      }
 
       // --- DEMO MOCK DATA ---
       // This will show a fake song so you can see the design before you put in your real ID.
