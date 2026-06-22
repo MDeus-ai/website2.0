@@ -275,8 +275,7 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
   const profileImages = [
     "assets/me.jpg",
     "assets/me-pixel.png",
-    "assets/me-anime.png",
-    "assets/me-cyberpunk.png",
+    "assets/me2.jpg",
   ];
 
   let currentIndex = 0;
@@ -443,6 +442,12 @@ function updateLegendColors() {
 // PLEASE REPLACE THIS PLACEHOLDER WITH YOUR ACTUAL DISCORD USER ID
 const DISCORD_ID = "1362785972672139454";
 
+// Kept at module scope so reconnections can always clear these —
+// if they lived inside initLanyard(), each reconnect creates a new
+// closure and the old intervals become orphaned and unstoppable.
+let spotifyInterval = null;
+let heartbeatInterval = null;
+
 function initLanyard() {
   const ws = new WebSocket("wss://api.lanyard.rest/socket");
 
@@ -450,14 +455,12 @@ function initLanyard() {
   const songEl = document.getElementById("spotify-song");
   const artistEl = document.getElementById("spotify-artist");
   const artEl = document.getElementById("spotify-album-art");
-  
+
   const timeCurrentEl = document.getElementById("spotify-time-current");
   const timeTotalEl = document.getElementById("spotify-time-total");
   const progressFillEl = document.getElementById("spotify-progress-fill");
 
   if (!spotifyWidget) return;
-
-  let spotifyInterval = null;
 
   function updateProgress(start, end) {
     if (!start || !end) return;
@@ -474,7 +477,8 @@ function initLanyard() {
     };
 
     if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
-    if (timeCurrentEl) timeCurrentEl.textContent = formatTime(Math.min(current, total));
+    if (timeCurrentEl)
+      timeCurrentEl.textContent = formatTime(Math.min(current, total));
     if (timeTotalEl) timeTotalEl.textContent = formatTime(total);
   }
 
@@ -493,9 +497,10 @@ function initLanyard() {
   ws.onmessage = (event) => {
     const { t, d, op } = JSON.parse(event.data);
 
-    // Heartbeat logic
+    // Heartbeat logic — clear any previous heartbeat before starting a new one
     if (op === 1) {
-      setInterval(() => {
+      if (heartbeatInterval) clearInterval(heartbeatInterval);
+      heartbeatInterval = setInterval(() => {
         if (ws.readyState === WebSocket.OPEN) {
           ws.send(JSON.stringify({ op: 3 }));
         }
@@ -505,7 +510,7 @@ function initLanyard() {
     if (t === "INIT_STATE" || t === "PRESENCE_UPDATE") {
       let spotify = d.spotify;
       const discordStatus = d.discord_status;
-      
+
       const statusIcon = document.querySelector(".status-indicator");
       const statusText = document.querySelector(".status-text");
 
@@ -532,12 +537,13 @@ function initLanyard() {
         spotify = {
           song: "Blinding Lights",
           artist: "The Weeknd",
-          album_art_url: "https://i.scdn.co/image/ab67616d0000b2738863bc11d2cb1239ce750fa1",
+          album_art_url:
+            "https://i.scdn.co/image/ab67616d0000b2738863bc11d2cb1239ce750fa1",
           track_id: "0VjIjW4GlUZAMYd2vXMi3b",
           timestamps: {
             start: now - 86000, // 1m 26s in
-            end: now + 86000 // Total 2m 52s
-          }
+            end: now + 86000, // Total 2m 52s
+          },
         };
       }
 
@@ -549,30 +555,40 @@ function initLanyard() {
 
         spotifyWidget.style.display = "flex";
 
-        // Progress bar logic
+        // Always clear the previous interval before starting a new one
         if (spotifyInterval) clearInterval(spotifyInterval);
-        if (spotify.timestamps && spotify.timestamps.start && spotify.timestamps.end) {
+        spotifyInterval = null;
+
+        if (
+          spotify.timestamps &&
+          spotify.timestamps.start &&
+          spotify.timestamps.end
+        ) {
           updateProgress(spotify.timestamps.start, spotify.timestamps.end);
           spotifyInterval = setInterval(() => {
             updateProgress(spotify.timestamps.start, spotify.timestamps.end);
           }, 1000);
         }
-
       } else {
-        // Not listening
-        spotifyWidget.style.display = "none";
+        // Not listening — stop the progress ticker immediately
         if (spotifyInterval) clearInterval(spotifyInterval);
+        spotifyInterval = null;
+        spotifyWidget.style.display = "none";
       }
     }
   };
 
   ws.onclose = () => {
     console.log("Lanyard WebSocket closed, reconnecting in 5s...");
+    // Stop the progress ticker so stale data doesn't keep animating
+    if (spotifyInterval) clearInterval(spotifyInterval);
+    spotifyInterval = null;
     setTimeout(initLanyard, 5000);
   };
 }
 
 initLanyard();
+
 
 // =======================
 // PLAYLIST EXPAND
@@ -602,17 +618,23 @@ if (playlistExpandBtn && playlistGrid) {
 // ACTIVITIES EXPAND
 // =======================
 const activitiesExpandBtn = document.getElementById("activities-expand-btn");
-const activitiesHiddenWrapper = document.getElementById("activities-hidden-wrapper");
+const activitiesHiddenWrapper = document.getElementById(
+  "activities-hidden-wrapper",
+);
 
 if (activitiesExpandBtn && activitiesHiddenWrapper) {
   activitiesExpandBtn.parentElement.style.display = "flex"; // Ensure it's visible
-  
+
   activitiesExpandBtn.addEventListener("click", () => {
     activitiesHiddenWrapper.classList.toggle("open");
     activitiesExpandBtn.classList.toggle("is-open");
 
-    const textSpan = activitiesExpandBtn.querySelector(".activities-expand-text");
-    const iconSpan = activitiesExpandBtn.querySelector(".activities-expand-icon");
+    const textSpan = activitiesExpandBtn.querySelector(
+      ".activities-expand-text",
+    );
+    const iconSpan = activitiesExpandBtn.querySelector(
+      ".activities-expand-icon",
+    );
 
     if (activitiesHiddenWrapper.classList.contains("open")) {
       if (textSpan) textSpan.textContent = "View less activities";
@@ -620,14 +642,18 @@ if (activitiesExpandBtn && activitiesHiddenWrapper) {
     } else {
       if (textSpan) textSpan.textContent = "View more activities";
       if (iconSpan) iconSpan.textContent = "arrow_drop_down";
-      
+
       // Close playlists if they are open when activities are minimized
       if (playlistGrid && playlistGrid.classList.contains("open")) {
         playlistGrid.classList.remove("open");
         if (playlistExpandBtn) {
           playlistExpandBtn.classList.remove("is-open");
-          const pText = playlistExpandBtn.querySelector(".playlist-expand-text");
-          const pIcon = playlistExpandBtn.querySelector(".playlist-expand-icon");
+          const pText = playlistExpandBtn.querySelector(
+            ".playlist-expand-text",
+          );
+          const pIcon = playlistExpandBtn.querySelector(
+            ".playlist-expand-icon",
+          );
           if (pText) pText.textContent = "View more playlists";
           if (pIcon) pIcon.textContent = "arrow_drop_down";
         }

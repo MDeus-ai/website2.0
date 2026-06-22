@@ -71,7 +71,7 @@
     height: 20rem;
   }
 
-  .hero-img {
+  .hero-img-wrapper {
     width: 25%;
   }
 
@@ -199,10 +199,9 @@
     text-align: center;
   }
 
-  .hero-img {
+  .hero-img-wrapper {
     width: 140px;
     height: 140px;
-    object-fit: cover;
   }
 
   .about-buttons {
@@ -269,10 +268,9 @@
     text-align: center;
   }
 
-  .hero-img {
+  .hero-img-wrapper {
     width: 140px;
     height: 140px;
-    object-fit: cover;
   }
 
   .change-img-btn {
