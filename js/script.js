@@ -699,6 +699,9 @@ function openDetailModal(detailId) {
   // Build the modal content
   let html = "";
 
+  // Body content wrapper starts here so everything matches container padding
+  html += `<div class="detail-modal-body">`;
+
   // Top dot grid (only if no hero image)
   if (!data.heroImage) {
     html += `<div class="detail-modal-dots detail-modal-dots-top"></div>`;
@@ -717,9 +720,6 @@ function openDetailModal(detailId) {
     <button class="detail-modal-close" id="detail-modal-close-btn" aria-label="Close">
       <ion-icon name="close-outline"></ion-icon>
     </button>`;
-
-  // Body content
-  html += `<div class="detail-modal-body">`;
 
   // Date, title, org
   html += `
@@ -767,10 +767,10 @@ function openDetailModal(detailId) {
     html += `</div>`;
   }
 
-  html += `</div>`; // close .detail-modal-body
-
   // Bottom dot grid
   html += `<div class="detail-modal-dots detail-modal-dots-bottom"></div>`;
+
+  html += `</div>`; // close .detail-modal-body
 
   // Inject and show
   modalInner.innerHTML = html;

@@ -1110,9 +1110,7 @@ body.light-mode .spotify-now-playing {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg-body);
 
   display: flex;
   align-items: center;
@@ -1131,7 +1129,7 @@ body.light-mode .spotify-now-playing {
 }
 
 body.light-mode .detail-modal-overlay {
-  background: rgba(248, 245, 239, 0.55);
+  background: var(--bg-body);
 }
 
 /* --- Modal window --- */
@@ -1146,9 +1144,9 @@ body.light-mode .detail-modal-overlay {
   overflow-x: hidden;
 
   background-color: var(--bg-body);
-  border: 1px solid var(--card-border);
+  border: none;
   border-radius: 0;
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: none;
 
   transform: translateY(20px);
   opacity: 0;
@@ -1172,9 +1170,7 @@ body.light-mode .detail-modal-overlay {
 }
 
 body.light-mode .detail-modal {
-  box-shadow:
-    0 24px 80px rgba(28, 26, 22, 0.2),
-    0 0 0 1px rgba(28, 26, 22, 0.06);
+  box-shadow: none;
 }
 
 /* Hide scrollbar but keep scrolling */
@@ -1197,10 +1193,10 @@ body.light-mode .detail-modal {
 
 .detail-modal-close {
   position: sticky;
-  top: 0.75rem;
+  top: 1rem; /* stick slightly below top edge */
   float: right;
-  margin-right: 0.75rem;
   z-index: 10;
+  margin-top: -0.2rem;
 
   display: inline-flex;
   align-items: center;
@@ -1246,8 +1242,9 @@ body.light-mode .detail-modal {
   aspect-ratio: 3 / 1;
   overflow: hidden;
   position: relative;
-  border-radius: 0;
+  border-radius: 11px;
   background-color: var(--bg-body);
+  margin-bottom: 1.5rem; /* add some spacing before the text */
 }
 
 .detail-modal-hero img {
@@ -1256,7 +1253,6 @@ body.light-mode .detail-modal {
   object-fit: cover;
   object-position: center;
   display: block;
-  transform: scale(1.05); /* Crop out any generated white borders */
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
@@ -1279,17 +1275,19 @@ body.light-mode .detail-modal {
 }
 
 .detail-modal-dots-top {
-  border-radius: 0;
+  border-radius: 11px;
+  margin-bottom: 1rem;
 }
 
 .detail-modal-dots-bottom {
-  border-radius: 0;
+  border-radius: 11px;
+  margin-top: 1rem;
 }
 
 /* --- Modal body content --- */
 
 .detail-modal-body {
-  padding: 1.5rem 2rem 0.5rem;
+  padding: 1.5rem 3rem 0.5rem;
 }
 
 .detail-modal-date {
