@@ -702,10 +702,8 @@ function openDetailModal(detailId) {
   // Body content wrapper starts here so everything matches container padding
   html += `<div class="detail-modal-body">`;
 
-  // Top dot grid (only if no hero image)
-  if (!data.heroImage) {
-    html += `<div class="detail-modal-dots detail-modal-dots-top"></div>`;
-  }
+  // Top dot grid (always show to match main page)
+  html += `<div class="detail-modal-dots detail-modal-dots-top"></div>`;
 
   // Hero image (optional)
   if (data.heroImage) {
