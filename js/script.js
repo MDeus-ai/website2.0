@@ -661,3 +661,181 @@ if (activitiesExpandBtn && activitiesHiddenWrapper) {
     }
   });
 }
+
+// =======================
+// DETAIL MODAL
+// =======================
+
+const DETAIL_DATA = {
+  "idi-intern": {
+    title: "Research Intern",
+    org: "Infectious Diseases Institute (IDI) Mulago",
+    date: "Present",
+    heroImage: "assets/idi-hero.png",
+    description: [
+      "At the Infectious Diseases Institute, I work under the Statistics and Data Science team applying rigorous statistical modeling to complex epidemiological datasets. My role bridges the gap between theoretical statistics and practical implementation — translating mathematical models into high-performance code.",
+      "I focus on implementing statistical algorithms in C++, JAX, and CUDA to accelerate computations that would be prohibitively slow in pure Python or R. This includes Bayesian hierarchical models, survival analysis pipelines, and Monte Carlo simulation frameworks.",
+      "As part of the onboarding process, I completed the Good Clinical Practice (GCP) certification, which covers ethical and scientific standards for designing, conducting, recording, and reporting clinical trials and research involving human subjects.",
+    ],
+    certificates: [
+      { name: "GCP Certificate", file: "assets/GCP Certificate.pdf" },
+      {
+        name: "GCP Completion Report",
+        file: "assets/GCP Completion Report.pdf",
+      },
+    ],
+    references: [],
+  },
+};
+
+// --- DOM references ---
+const modalOverlay = document.getElementById("detail-modal-overlay");
+const modalInner = document.getElementById("detail-modal-inner");
+
+function openDetailModal(detailId) {
+  const data = DETAIL_DATA[detailId];
+  if (!data || !modalOverlay || !modalInner) return;
+
+  // Build the modal content
+  let html = "";
+
+  // Top dot grid (only if no hero image)
+  if (!data.heroImage) {
+    html += `<div class="detail-modal-dots detail-modal-dots-top"></div>`;
+  }
+
+  // Hero image (optional)
+  if (data.heroImage) {
+    html += `
+      <div class="detail-modal-hero">
+        <img src="${data.heroImage}" alt="${data.org}" />
+      </div>`;
+  }
+
+  // Close button
+  html += `
+    <button class="detail-modal-close" id="detail-modal-close-btn" aria-label="Close">
+      <ion-icon name="close-outline"></ion-icon>
+    </button>`;
+
+  // Body content
+  html += `<div class="detail-modal-body">`;
+
+  // Date, title, org
+  html += `
+    <p class="detail-modal-date">${data.date}</p>
+    <h2 class="detail-modal-title">${data.title}</h2>
+    <p class="detail-modal-org">${data.org}</p>`;
+
+  // Description paragraphs
+  if (data.description && data.description.length > 0) {
+    html += `<div class="detail-modal-description">`;
+    data.description.forEach((p) => {
+      html += `<p>${p}</p>`;
+    });
+    html += `</div>`;
+  }
+
+  // Certificates
+  if (data.certificates && data.certificates.length > 0) {
+    html += `<h3 class="detail-modal-section-title">Certificates</h3>`;
+    html += `<div class="detail-modal-certs">`;
+    data.certificates.forEach((cert) => {
+      html += `
+        <div class="detail-modal-cert-card">
+          <div class="detail-modal-cert">
+            <ion-icon name="document-text" class="doc-icon"></ion-icon>
+            <span>${cert.name}</span>
+          </div>
+          <div class="detail-modal-cert-actions">
+            <a class="detail-modal-cert-download-btn" href="${cert.file}" download>
+              <ion-icon name="download-outline"></ion-icon> Download
+            </a>
+          </div>
+        </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // References
+  if (data.references && data.references.length > 0) {
+    html += `<h3 class="detail-modal-section-title">References</h3>`;
+    html += `<div class="detail-modal-refs">`;
+    data.references.forEach((ref) => {
+      html += `<p class="detail-modal-ref">${ref}</p>`;
+    });
+    html += `</div>`;
+  }
+
+  html += `</div>`; // close .detail-modal-body
+
+  // Bottom dot grid
+  html += `<div class="detail-modal-dots detail-modal-dots-bottom"></div>`;
+
+  // Inject and show
+  modalInner.innerHTML = html;
+  modalOverlay.classList.remove("is-closing");
+
+  // Force reflow before adding is-visible for animation
+  void modalOverlay.offsetHeight;
+  modalOverlay.classList.add("is-visible");
+  document.body.classList.add("modal-open");
+
+  // Scroll modal back to top
+  const modalEl = document.getElementById("detail-modal");
+  if (modalEl) modalEl.scrollTop = 0;
+
+  // Bind close button
+  const closeBtn = document.getElementById("detail-modal-close-btn");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", closeDetailModal);
+  }
+
+}
+
+function closeDetailModal() {
+  if (!modalOverlay) return;
+
+  // Add closing class for exit animation
+  modalOverlay.classList.add("is-closing");
+  modalOverlay.classList.remove("is-visible");
+
+  // Wait for animation to finish, then clean up
+  setTimeout(() => {
+    modalOverlay.classList.remove("is-closing");
+    if (modalInner) modalInner.innerHTML = "";
+    document.body.classList.remove("modal-open");
+  }, 300);
+}
+
+// --- Event delegation for "Show details" buttons ---
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".timeline-details-btn");
+  if (btn) {
+    e.preventDefault();
+    const detailId = btn.getAttribute("data-detail-id");
+    if (detailId) openDetailModal(detailId);
+  }
+});
+
+// --- Close on backdrop click ---
+if (modalOverlay) {
+  modalOverlay.addEventListener("click", (e) => {
+    // Only close if clicking the overlay itself, not the modal content
+    if (e.target === modalOverlay) {
+      closeDetailModal();
+    }
+  });
+}
+
+// --- Close on Escape key ---
+document.addEventListener("keydown", (e) => {
+  if (
+    e.key === "Escape" &&
+    modalOverlay &&
+    modalOverlay.classList.contains("is-visible")
+  ) {
+    closeDetailModal();
+  }
+});
+

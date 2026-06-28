@@ -251,6 +251,40 @@
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
+
+  /* Detail modal responsive */
+  .detail-modal {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    border-radius: 0;
+  }
+
+  .detail-modal-hero {
+    border-radius: 0;
+  }
+
+  .detail-modal-body {
+    padding: 1.2rem 1.4rem 0.5rem;
+  }
+
+  .detail-modal-dots {
+    height: 15rem; /* Match main page dots */
+  }
+
+  .detail-modal-dots-top,
+  .detail-modal-dots-bottom {
+    border-radius: 0;
+  }
+
+  .detail-modal-certs {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .detail-modal-cert-download-btn {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.5rem;
+  }
 }
 
 /* *************************** */
@@ -313,5 +347,55 @@
   .projects-container {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  /* Detail modal — full-screen on very small screens */
+  .detail-modal {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .detail-modal-hero {
+    border-radius: 0;
+  }
+
+  .detail-modal-body {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .detail-modal-title {
+    font-size: 1.1rem;
+  }
+
+  .detail-modal-org {
+    font-size: 0.82rem;
+  }
+
+  .detail-modal-description p {
+    font-size: 0.82rem;
+  }
+
+  .detail-modal-dots {
+    height: 15rem; /* Match main page dots */
+  }
+
+  .detail-modal-dots-top,
+  .detail-modal-dots-bottom {
+    border-radius: 0;
+  }
+
+  .detail-modal-certs {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-modal-section-title {
+    font-size: 0.78rem;
+  }
+
+  .detail-modal-close {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
   }
 }

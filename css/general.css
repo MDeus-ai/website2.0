@@ -135,6 +135,12 @@ body.theme-transitioning *::after {
 html {
   /* font: size 62.5%; */
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {

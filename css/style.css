@@ -1053,3 +1053,511 @@ body.light-mode .spotify-now-playing {
   /* Smooth transition for continuous updates */
   transition: width 1s linear;
 }
+
+/* ================================== */
+/* ==========DETAIL MODAL=========== */
+/* ================================== */
+
+/* --- Timeline "Show details" button --- */
+
+.timeline-details-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--card-bg), transparent 30%);
+  border: 1px solid var(--card-border);
+  border-radius: 100px;
+  cursor: pointer;
+  line-height: 1;
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.timeline-details-arrow {
+  font-size: 0.8rem;
+  transition: transform 0.25s ease;
+}
+
+@media (hover: hover) {
+  .timeline-details-btn:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+    background: color-mix(in srgb, var(--card-bg), transparent 10%);
+  }
+
+  .timeline-details-btn:hover .timeline-details-arrow {
+    transform: translateX(2px);
+  }
+}
+
+.timeline-details-btn:active {
+  transform: scale(0.96);
+}
+
+/* --- Backdrop overlay --- */
+
+.detail-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.35s;
+}
+
+.detail-modal-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.light-mode .detail-modal-overlay {
+  background: rgba(248, 245, 239, 0.55);
+}
+
+/* --- Modal window --- */
+
+.detail-modal {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background-color: var(--bg-body);
+  border: 1px solid var(--card-border);
+  border-radius: 0;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+
+  transform: translateY(20px);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease;
+}
+
+.detail-modal-overlay.is-visible .detail-modal {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Closing state — reverse animation */
+.detail-modal-overlay.is-closing .detail-modal {
+  transform: translateY(10px);
+  opacity: 0;
+  transition:
+    transform 0.25s cubic-bezier(0.4, 0, 1, 1),
+    opacity 0.2s ease;
+}
+
+body.light-mode .detail-modal {
+  box-shadow:
+    0 24px 80px rgba(28, 26, 22, 0.2),
+    0 0 0 1px rgba(28, 26, 22, 0.06);
+}
+
+/* Hide scrollbar but keep scrolling */
+.detail-modal::-webkit-scrollbar {
+  display: none;
+}
+
+.detail-modal {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* --- Modal inner content --- */
+
+.detail-modal-inner {
+  padding: 0;
+}
+
+/* --- Close button --- */
+
+.detail-modal-close {
+  position: sticky;
+  top: 0.75rem;
+  float: right;
+  margin-right: 0.75rem;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+
+  background: color-mix(in srgb, var(--bg-body), transparent 20%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  line-height: 1;
+  padding: 0;
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+@media (hover: hover) {
+  .detail-modal-close:hover {
+    color: var(--text-main);
+    background: color-mix(in srgb, var(--text-secondary), transparent 80%);
+    border-color: var(--text-main);
+  }
+}
+
+.detail-modal-close:active {
+  transform: scale(0.92);
+}
+
+/* --- Hero image area --- */
+
+.detail-modal-hero {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0;
+  background-color: var(--bg-body);
+}
+
+.detail-modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transform: scale(1.05); /* Crop out any generated white borders */
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+
+
+
+
+/* --- Dot grids inside modal --- */
+
+.detail-modal-dots {
+  width: 100%;
+  background-image: radial-gradient(
+    circle,
+    var(--dots-color) 1.4px,
+    transparent var(--dots-transparency)
+  );
+  background-size: 8px 8px;
+  height: 15rem; /* Matched to main page dot banners */
+}
+
+.detail-modal-dots-top {
+  border-radius: 0;
+}
+
+.detail-modal-dots-bottom {
+  border-radius: 0;
+}
+
+/* --- Modal body content --- */
+
+.detail-modal-body {
+  padding: 1.5rem 2rem 0.5rem;
+}
+
+.detail-modal-date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  margin-bottom: 0.3rem;
+}
+
+.detail-modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.detail-modal-org {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}
+
+.detail-modal-description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-modal-description p {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+/* --- Certificates section --- */
+
+.detail-modal-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.detail-modal-certs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-modal-cert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.5rem;
+  background: color-mix(in srgb, var(--card-bg), transparent 20%);
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.15s ease,
+    box-shadow 0.25s ease;
+}
+
+.detail-modal-cert ion-icon.doc-icon {
+  font-size: 1.8rem;
+  color: var(--text-main);
+  opacity: 0.8;
+  transition: opacity 0.25s ease;
+}
+
+@media (hover: hover) {
+  .detail-modal-cert:hover {
+    color: var(--text-main);
+    border-color: var(--text-main);
+    background: color-mix(in srgb, var(--card-bg), transparent 0%);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  .detail-modal-cert:hover ion-icon.doc-icon {
+    opacity: 1;
+  }
+}
+
+.detail-modal-cert:active {
+  transform: scale(0.97);
+}
+
+body.light-mode .detail-modal-cert {
+  background: #f0ece4;
+  border-color: #d8d3c8;
+}
+
+body.light-mode .detail-modal-cert:hover {
+  background: #e6e1d6;
+  border-color: #b8b2a6;
+}
+
+/* --- Cert card wrapper --- */
+.detail-modal-cert-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  border: 1px solid var(--card-border);
+  background: color-mix(in srgb, var(--card-bg), transparent 20%);
+}
+
+.detail-modal-cert-card .detail-modal-cert {
+  border: none;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+/* --- Cert action buttons (View / Download) --- */
+.detail-modal-cert-actions {
+  display: flex;
+  border-top: 1px solid var(--card-border);
+}
+
+.detail-modal-cert-view-btn,
+.detail-modal-cert-download-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.5rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.detail-modal-cert-view-btn {
+  border-right: 1px solid var(--card-border);
+}
+
+.detail-modal-cert-view-btn ion-icon,
+.detail-modal-cert-download-btn ion-icon {
+  font-size: 0.9rem;
+}
+
+@media (hover: hover) {
+  .detail-modal-cert-view-btn:hover,
+  .detail-modal-cert-download-btn:hover {
+    color: var(--text-main);
+    background: color-mix(in srgb, var(--text-secondary), transparent 88%);
+  }
+}
+
+.detail-modal-cert-view-btn:active,
+.detail-modal-cert-download-btn:active {
+  transform: scale(0.97);
+}
+
+body.light-mode .detail-modal-cert-card {
+  background: #f0ece4;
+  border-color: #d8d3c8;
+}
+
+body.light-mode .detail-modal-cert-view-btn:hover,
+body.light-mode .detail-modal-cert-download-btn:hover {
+  background: #e6e1d6;
+}
+
+/* --- Inline Document Viewer --- */
+.detail-modal-doc-viewer {
+  display: none;
+  width: 100%;
+  height: 60vh;
+  min-height: 400px;
+  margin-top: 1rem;
+  border: 1px solid var(--card-border);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--bg-body), transparent 50%);
+  overflow: hidden;
+}
+
+.detail-modal-doc-viewer.is-active {
+  display: block;
+}
+
+.detail-modal-doc-viewer iframe,
+.detail-modal-doc-viewer object {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* --- References section --- */
+
+.detail-modal-refs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.detail-modal-ref {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.detail-modal-ref a {
+  color: var(--text-main);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.detail-modal-ref a:hover {
+  opacity: 0.7;
+}
+
+/* --- Body scroll lock --- */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* --- Light mode polish for modal --- */
+
+body.light-mode .detail-modal-close {
+  background: rgba(248, 245, 239, 0.8);
+  border-color: #d8d3c8;
+}
+
+body.light-mode .timeline-details-btn {
+  background: #f0ece4;
+  border-color: #d8d3c8;
+}
+
+body.light-mode .timeline-details-btn:hover {
+  background: #e6e1d6;
+  border-color: #b8b2a6;
+}
