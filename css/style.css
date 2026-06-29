@@ -162,6 +162,17 @@ body.light-mode .hero-container {
   padding-left: 2rem;
 }
 
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.verified-badge {
+  color: #1da1f2;
+  font-size: 1.35rem;
+}
+
 .change-img-btn {
   position: absolute;
   transform: translate(1000%, -300%);
@@ -855,6 +866,15 @@ body.light-mode .project-img-container {
 .social-links-container a:hover,
 .social-links-container a:active {
   color: var(--text-main);
+}
+
+/* Adjusting social icons to be smaller and visually uniform on desktop */
+.social-links-container a i {
+  font-size: 1.15rem; /* devicons render larger, so scale them down to match ion-icons */
+}
+
+.social-links-container a ion-icon {
+  font-size: 1.35rem; /* ion-icons render smaller */
 }
 
 .quote-container {
