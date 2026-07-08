@@ -673,9 +673,9 @@ const DETAIL_DATA = {
     date: "Present",
     heroImage: "assets/idi-hero.png",
     description: [
-      "At the Infectious Diseases Institute, I work under the Statistics and Data Science team applying rigorous statistical modeling to complex epidemiological datasets. My role bridges the gap between theoretical statistics and practical implementation — translating mathematical models into high-performance code.",
-      "I focus on implementing statistical algorithms in C++, JAX, and CUDA to accelerate computations that would be prohibitively slow in pure Python or R. This includes Bayesian hierarchical models, survival analysis pipelines, and Monte Carlo simulation frameworks.",
-      "As part of the onboarding process, I completed the Good Clinical Practice (GCP) certification, which covers ethical and scientific standards for designing, conducting, recording, and reporting clinical trials and research involving human subjects.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
+      "Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.",
+      "Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
     ],
     certificates: [
       { name: "GCP Certificate", file: "assets/GCP Certificate.pdf" },
