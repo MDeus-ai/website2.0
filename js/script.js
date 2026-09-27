@@ -252,7 +252,7 @@ function updateTimeAndStatus() {
 
   // Logic: Online between 8:00 and 22:00
   if (hour >= 8 && hour < 22) {
-    statusText.textContent = "Online";
+    statusText.textContent = "Online"
     statusIcon.style.color = "#08cb00"; // Green
     statusIcon.setAttribute("name", "radio-button-on");
   } else {
@@ -261,6 +261,7 @@ function updateTimeAndStatus() {
     statusIcon.setAttribute("name", "radio-button-off");
   }
 }
+
 
 // Initialize
 updateVisitCount();
@@ -275,7 +276,6 @@ setInterval(updateTimeAndStatus, 60000); // Update every minute
   const profileImages = [
     "assets/me.jpg",
     "assets/me-pixel.png",
-    "assets/me2.jpg",
   ];
 
   let currentIndex = 0;
@@ -673,9 +673,12 @@ const DETAIL_DATA = {
     date: "Present",
     heroImage: "assets/idi-hero.png",
     description: [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
-      "Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.",
-      "Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.",
+      "Worked under the Statistics and Data Management unit at IDI,focusing on biostatistical data cleaning, relational database design, and data analysis."
+    ],
+    contributions: [
+      "<strong>Biostatistics in R:</strong> Cleaned a national Fleming Fund dataset of over 20,000 records, resolved missing dates with lubridate, standardized bacterial taxonomy using the AMR package, and built resistance profile variables for the Principal Investigator's report.",
+      "<strong>Clinical Databases:</strong> Built and deployed longitudinal data collection tools in REDCap and ODK (including the RECENT TB trial), configuring custom HTML table layouts, validation warnings, and multi-event schedules.",
+      "<strong>Data Engineering &amp; BI:</strong> Queried SQL Server databases using custom views and designed interactive Power BI dashboards using Star Schema modeling and DAX calculations.",
     ],
     certificates: [
       { name: "GCP Certificate", file: "assets/GCP Certificate.pdf" },
@@ -732,6 +735,16 @@ function openDetailModal(detailId) {
       html += `<p>${p}</p>`;
     });
     html += `</div>`;
+  }
+
+  // Key contributions
+  if (data.contributions && data.contributions.length > 0) {
+    html += `<h3 class="detail-modal-section-title">Key Contributions</h3>`;
+    html += `<ul class="detail-modal-contributions">`;
+    data.contributions.forEach((item) => {
+      html += `<li>${item}</li>`;
+    });
+    html += `</ul>`;
   }
 
   // Certificates

@@ -1349,6 +1349,28 @@ body.light-mode .detail-modal {
   letter-spacing: 0.2px;
 }
 
+.detail-modal-contributions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0 0 1.5rem;
+  padding-left: 1.15rem;
+  list-style: disc;
+}
+
+.detail-modal-contributions li {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+.detail-modal-contributions strong {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
 /* --- Certificates section --- */
 
 .detail-modal-section-title {
